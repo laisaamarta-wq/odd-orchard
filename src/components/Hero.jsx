@@ -23,6 +23,8 @@ export default function Hero() {
   const drops = useRef(null)
   const current = useRef(0)
   const busy = useRef(false)
+  const queued = useRef(null) // latest world requested while a transition is still playing
+  const switchRef = useRef(null)
   const idle = useRef([])
   const [autoplay, setAutoplay] = useState(true)
   const [loaded, setLoaded] = useState(false)
@@ -182,7 +184,11 @@ export default function Hero() {
   const switchTo = useCallback(
     (next, origin) => {
       const cur = current.current
-      if (next === cur || busy.current) return
+      if (busy.current) {
+        queued.current = { next, origin }
+        return
+      }
+      if (next === cur) return
       busy.current = true
       current.current = next
       setProgressKey((k) => k + 1)
@@ -210,7 +216,14 @@ export default function Hero() {
         oy = r.top + r.height / 2 - box.top
       }
 
-      const tl = gsap.timeline({ onComplete: () => (busy.current = false) })
+      const tl = gsap.timeline({
+        onComplete: () => {
+          busy.current = false
+          const q = queued.current
+          queued.current = null
+          if (q) switchRef.current?.(q.next, q.origin)
+        },
+      })
       tl.add(exit(cur), 0)
         .add(hideFruits(cur), 0)
         .to(bottles.current[cur], { y: 90, rotation: -9, scale: 0.92, autoAlpha: 0, duration: 0.55, ease: 'power3.in' }, 0.05)
@@ -235,7 +248,10 @@ export default function Hero() {
     [setActive, startIdle],
   )
 
-  useEffect(() => registerSwitcher(switchTo), [registerSwitcher, switchTo])
+  useEffect(() => {
+    switchRef.current = switchTo
+    registerSwitcher(switchTo)
+  }, [registerSwitcher, switchTo])
 
   /* ---------- intro ---------- */
 
