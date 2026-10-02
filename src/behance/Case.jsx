@@ -91,8 +91,8 @@ const Title = ({ a, b, size = 112, className = '' }) => (
   </h2>
 )
 
-const Shot = ({ n, w, h, alt, className = '', radius = 16 }) => (
-  <img className={`shot ${className}`} src={shot(n)} alt={alt} style={{ width: w, height: h, borderRadius: radius }} loading="lazy" />
+const Shot = ({ n, w, h, alt, className = '', radius = 16, pos }) => (
+  <img className={`shot ${className}`} src={shot(n)} alt={alt} style={{ width: w, height: h, borderRadius: radius, objectPosition: pos }} loading="lazy" />
 )
 
 const Cap = ({ k, children }) => (
@@ -652,7 +652,7 @@ function P12() {
           <dd>Higgsfield (GPT Image 2.5), Python + Pillow, GitHub, Vercel</dd>
         </div>
       </dl>
-      <Shot n="shot-footer" w={1240} h={775} alt="Footer with the giant wordmark and peeking keepers" />
+      <Shot n="shot-footer" w={1240} h={620} pos="bottom center" alt="Footer with the giant wordmark and peeking keepers" />
     </Plate>
   )
 }

@@ -127,7 +127,8 @@ em {
   color: #c3ea5c;
 }
 @media (max-width: 760px) {
-  .bar__links {
+  .bar__links,
+  .bar__name .mono {
     display: none;
   }
 }
@@ -949,4 +950,10 @@ em {
 .cover__line em {
   font-stretch: 100%;
   font-variation-settings: normal;
+}
+.cover-wrap .cover {
+  zoom: min(1, calc(var(--s) * 1.62));
+}
+.cover-wrap {
+  max-width: 100%;
 }
