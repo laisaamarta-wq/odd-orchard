@@ -20,3 +20,14 @@ npm run preview    # serve the production build
 No environment variables or secrets are required.
 
 `scripts/process_assets.py` converts the raw Higgsfield PNGs (`raw/`, not committed) into the WebPs in `public/assets/`.
+
+## Behance case study (`/behance/`)
+A presentation-only case study page, built separately (`vite.behance.config.js`) so the production bundle is unchanged.
+Every image on it is a real capture of the production site. See [`behance/PUBLISHING.md`](behance/PUBLISHING.md) for the copy, upload order and publishing settings.
+
+```bash
+npm run behance:dev       # http://localhost:5174/behance/
+npm run behance:capture   # Playwright stills → public/behance/shots (needs the site at OO_BASE, default localhost:4173)
+npm run behance:export    # plates + cover → behance-export/plates
+npm run behance:motion    # deterministic 60 fps clips + GIFs → behance-export/motion (needs ffmpeg)
+```
