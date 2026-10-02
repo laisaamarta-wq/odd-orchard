@@ -1,0 +1,28 @@
+# dependencies & builds
+node_modules/
+dist/
+dist-ssr/
+.vite/
+
+# raw generation sources (processed WebPs live in public/assets)
+raw/
+
+# env & secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+.vercel/
+
+# local tooling
+.dev.log
+*.tgz
+fetch-assets.command
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.local
