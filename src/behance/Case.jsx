@@ -596,7 +596,6 @@ function P12() {
 /* ---------- 13 · let's talk ---------- */
 
 const WA = '37128203044'
-const WA_LABEL = '+371 28203044'
 const WA_URL = `https://wa.me/${WA}`
 
 // A seamless 6 s loop: every animation duration divides 6 s, so the motion
@@ -645,7 +644,7 @@ function P13() {
           </a>
           <p className="p13__note">Available for freelance projects &amp; creative collaborations.</p>
           <a className="p13__wa mono" href={WA_URL} target="_blank" rel="noreferrer">
-            WhatsApp — {WA_LABEL}
+            Chat on WhatsApp ↗
           </a>
         </div>
 
