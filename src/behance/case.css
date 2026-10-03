@@ -957,3 +957,29 @@ em {
 .cover-wrap {
   max-width: 100%;
 }
+
+/* ---------- 02 · challenge statement ---------- */
+
+.p02 .plate__art {
+  display: flex;
+  flex-direction: column;
+}
+.p02__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--g);
+  align-content: center;
+  row-gap: 48px;
+  padding-bottom: 40px;
+}
+.p02__title {
+  grid-column: 1 / span 10;
+  font-size: 148px;
+}
+.p02__text {
+  grid-column: 7 / span 5;
+  font-size: 20px;
+  line-height: 1.5;
+  opacity: 0.86;
+}

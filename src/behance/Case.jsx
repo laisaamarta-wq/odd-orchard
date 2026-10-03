@@ -145,35 +145,17 @@ function P01() {
 /* ---------- 02 · context ---------- */
 
 function P02() {
+  // A typographic statement: the problem. The what/why lives in the Behance intro text, not here.
   return (
-    <Plate id="02" h={0} label="Context">
-      <div className="grid p02__top">
-        <h2 className="t-display p02__title" style={{ fontSize: 96 }}>
-          A juice brand where every flavor <em>is a world.</em>
+    <Plate id="02" h={760} label="01 — Brand identity · Challenge" className="p02">
+      <div className="p02__body">
+        <h2 className="t-display p02__title">
+          Most juice brands <em>look alike.</em>
         </h2>
-        <div className="p02__copy">
-          <div>
-            <p className="lab">Overview</p>
-            <p>
-              Odd Orchard is a fictional cold-pressed juice from an orchard that isn’t on any map. The site sells four flavors and treats each one as
-              a world, not a product variant.
-            </p>
-          </div>
-          <div>
-            <p className="lab">Challenge</p>
-            <p>
-              Juice brands look alike: fruit, splash, bright colour, repeat. The aim was a brand remembered by character, and a site where switching
-              a flavor feels like stepping somewhere else, not changing a filter.
-            </p>
-          </div>
-        </div>
-      </div>
-      <Shot n="shot-hero-kiwi" w={1240} h={775} alt="Odd Orchard homepage, kiwi world" className="p02__shot" />
-      <div className="p02__meta mono">
-        <span>Self-initiated concept</span>
-        <span>Concept · Art direction · UX/UI · AI visuals · Front-end</span>
-        <span>React · GSAP · Lenis · Higgsfield</span>
-        <span>{LIVE}</span>
+        <p className="p02__text">
+          Fruit, splash, bright colour, repeat. The aim was a brand remembered by character — and a site where switching a flavor feels like
+          stepping somewhere else, not changing a filter.
+        </p>
       </div>
     </Plate>
   )
@@ -184,7 +166,7 @@ function P02() {
 function P03() {
   const f = KIWI
   return (
-    <Plate id="03" h={0} label="The idea">
+    <Plate id="03" h={0} label="01 — Brand identity · Idea">
       <div className="grid p03__top">
         <Title a="A flavor is" b="a world." size={120} />
         <p className="lede">
@@ -246,38 +228,6 @@ function P03() {
         </ol>
       </div>
 
-      <table className="p03__table">
-        <thead className="mono">
-          <tr>
-            <th>Nº</th>
-            <th>Flavor</th>
-            <th>Keeper</th>
-            <th>Motion</th>
-            <th>Palette · 7 tokens</th>
-          </tr>
-        </thead>
-        <tbody>
-          {FLAVORS.map((x) => (
-            <tr key={x.id}>
-              <td className="mono">{x.no}</td>
-              <td>
-                <strong>{x.full}</strong>
-              </td>
-              <td>
-                {x.keeper.name} · <em>{x.keeper.latin}</em>
-              </td>
-              <td className="mono">{x.keeper.motion}</td>
-              <td>
-                <span className="sw-mini">
-                  {TOKENS.map((t) => (
-                    <i key={t} style={{ background: x.palette[t] }} />
-                  ))}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </Plate>
   )
 }
@@ -287,7 +237,7 @@ function P03() {
 function P04() {
   const theme = { bg: KIWI.palette.ink, ink: KIWI.palette.bg }
   return (
-    <Plate id="04" h={0} theme={theme} label="Visual language" className="p04">
+    <Plate id="04" h={0} theme={theme} label="01 — Brand identity · Visual language" className="p04">
       <div className="grid p04__top">
         <Title a="Grotesque says what it is." b="Serif says how it feels." size={92} />
         <p className="lede">
@@ -350,7 +300,7 @@ function P05() {
       {FLAVORS.map((f) => (
         <article key={f.id} className={`p05__cell p05__cell--${f.id}`} style={pal(f)}>
           <header className="mono">
-            <span>Plate 05 · The keepers</span>
+            <span>{f.no === '01' ? '01 — Brand identity · Keepers' : f.keeper.species}</span>
             <span>Nº {f.no} / 04</span>
           </header>
           <img className="p05__char" src={asset(`char-${f.id}`)} alt={`${f.keeper.name}, the ${f.keeper.species.toLowerCase()}`} />
@@ -380,7 +330,7 @@ function P05() {
 
 function P06() {
   return (
-    <Plate id="06" h={0} label="The product · hero">
+    <Plate id="06" h={0} label="02 — Digital experience · Hero">
       <div className="grid p06__top">
         <Title a="One layout," b="four worlds." size={112} />
         <p className="lede">Nothing in the hero is written for one flavor. Palette, word, keeper, fruit, tagline and notes all come from the active world.</p>
@@ -414,7 +364,7 @@ const FRAMES = [
 function P07() {
   const theme = { bg: CHERRY.palette.bg, ink: CHERRY.palette.ink }
   return (
-    <Plate id="07" h={0} theme={theme} label="Interaction · world switch" className="p07">
+    <Plate id="07" h={0} theme={theme} label="02 — Digital experience · World switch" className="p07">
       <div className="grid p07__top">
         <Title a="The switch is staged," b="not faded." size={104} />
         <p className="lede">
@@ -451,7 +401,7 @@ function P07() {
 
 function P08() {
   return (
-    <Plate id="08" h={0} label="The product · specimen & basket">
+    <Plate id="08" h={0} label="03 — Interaction · Specimen & basket">
       <div className="grid p08__top">
         <Title a="A specimen card" b="with a basket." size={104} />
         <p className="lede">
@@ -487,7 +437,7 @@ const CHAPTERS = [
 function P09() {
   const theme = { bg: KIWI.palette.ink, ink: KIWI.palette.bg }
   return (
-    <Plate id="09" h={0} theme={theme} label="Storytelling · scroll" className="p09">
+    <Plate id="09" h={0} theme={theme} label="03 — Interaction · Scroll" className="p09">
       <div className="grid p09__top">
         <Title a="Scroll does" b="the storytelling." size={104} />
         <p className="lede">
@@ -526,7 +476,7 @@ function P09() {
 
 function P10() {
   return (
-    <Plate id="10" h={0} label="Responsive">
+    <Plate id="10" h={0} label="04 — Responsive">
       <div className="grid p10__top">
         <Title a="Desktop, tablet," b="mobile." size={104} />
         <p className="lede">
@@ -571,7 +521,7 @@ function P10() {
 function P11() {
   const theme = { bg: KIWI.palette.bg, ink: KIWI.palette.ink }
   return (
-    <Plate id="11" h={0} theme={theme} label="Details" className="p11">
+    <Plate id="11" h={0} theme={theme} label="05 — Final result · Details" className="p11">
       <div className="grid p11__top">
         <Title a="Small parts," b="same world." size={104} />
         <p className="lede">Every component reads the active palette, so the same switcher, chip and stepper exist in four colourways without a single variant.</p>
@@ -619,7 +569,7 @@ function P11() {
 function P12() {
   const theme = { bg: KIWI.palette.ink, ink: KIWI.palette.bg }
   return (
-    <Plate id="12" h={0} theme={theme} label="Result" className="p12">
+    <Plate id="12" h={0} theme={theme} label="05 — Final result" className="p12">
       <div className="grid p12__top">
         <Title a="Visit" b="the orchard." size={150} />
         <div>
