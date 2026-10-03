@@ -635,69 +635,23 @@ function Cover() {
       <img className="cv__fruit" src={asset('fruit-cherry-2')} alt="" style={{ left: 262, top: 196, width: 54, transform: 'rotate(14deg)' }} />
       <img className="cv__fruit cv__fruit--near" src={asset('fruit-cherry-4')} alt="" style={{ left: -46, top: 426, width: 206, transform: 'rotate(-16deg)' }} />
 
-      {/* interface */}
-      <header className="cv__nav">
-        <span className="cv__logo">
-          <Logo />
-        </span>
-        <span className="cv__links">
-          {['Flavors', 'The bottle', 'Field notes', 'Keepers', 'Ritual'].map((l) => (
-            <span key={l}>{l}</span>
-          ))}
-        </span>
-        <span className="cv__basket">
-          Basket <b>2</b>
-        </span>
-      </header>
-
-      <div className="cv__copy">
-        <p className="mono cv__kicker">Cold-pressed · from an orchard that isn’t on any map</p>
-        <h1 className="cv__title">
-          Every flavor <em>has a keeper.</em>
-        </h1>
-        <p className="cv__chip">
-          <i />
-          <span>
-            {f.full} — kept by <b>{f.keeper.name}</b>, the velvet cherry bat
-          </span>
-        </p>
-        <span className="cv__btn">
-          Taste the cherry world <span>→</span>
-        </span>
-      </div>
-
-      <div className="cv__side">
-        <p className="cv__no">
-          Nº {f.no}
-          <small className="mono"> / 04</small>
-        </p>
-        <p className="cv__tag">{f.tagline}</p>
-        <p className="cv__notes">
-          {f.notes.map((n) => (
-            <span key={n} className="mono">
-              {n}
-            </span>
-          ))}
-        </p>
-      </div>
-
+      {/* only a few large type moments — small UI copy does not survive cover size */}
+      <span className="cv__logo">
+        <Logo />
+      </span>
+      <h1 className="cv__title">
+        Every flavor <em>has a keeper.</em>
+      </h1>
+      <p className="cv__no">Nº {f.no}</p>
       <nav className="cv__switch" aria-label="Flavors">
         {FLAVORS.map((x) => (
           <span key={x.id} className={`cv__sw ${x.id === f.id ? 'is-on' : ''}`}>
             <i style={{ background: x.palette.bg }}>
               <img src={asset(`bottle-${x.id}`)} alt="" />
             </i>
-            <span>
-              <small className="mono">{x.no}</small>
-              {x.name}
-            </span>
           </span>
         ))}
-        <span className="cv__cursor mono" aria-hidden="true">
-          Switch
-        </span>
       </nav>
-      <p className="mono cv__scroll">Scroll into the orchard</p>
     </section>
   )
 }
