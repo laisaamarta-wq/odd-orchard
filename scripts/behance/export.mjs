@@ -6,7 +6,10 @@ import { BASE, OUT, ensureDir, loadPlaywright } from './lib.mjs'
 import fs from 'node:fs'
 
 const DIR = ensureDir(path.join(OUT, 'plates'))
-const ALL = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', 'cover']
+// Internal plate ids (Case.jsx PLATES); files are named by their printed number.
+const IDS = ['01', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+const ALL = [...IDS, 'cover']
+const fileNo = (id) => String(IDS.indexOf(id) + 1).padStart(2, '0')
 const want = process.argv.slice(2).length ? process.argv.slice(2) : ALL
 
 const { chromium } = await loadPlaywright()
@@ -30,7 +33,7 @@ for (const id of want) {
     await Promise.all([...document.images].map((im) => (im.complete ? 0 : im.decode().catch(() => 0))))
   })
   await page.waitForTimeout(300)
-  const name = cover ? 'cover-1616x1264.png' : `plate-${id}.jpg`
+  const name = cover ? 'cover-1616x1264.png' : `plate-${fileNo(id)}.jpg`
   const opts = cover ? {} : { type: 'jpeg', quality: 92 }
   await page.locator(`[data-plate="${id}"]`).screenshot({ path: path.join(DIR, name), ...opts })
   console.log('✓', name)

@@ -24,7 +24,6 @@ function Logo() {
 const shot = (n) => `/behance/shots/${n}.webp`
 const [KIWI, ORANGE, CHERRY, PITAYA] = FLAVORS
 const LIVE = 'odd-orchard.vercel.app'
-const TOTAL = 12
 const TOKENS = ['bg', 'bg2', 'ink', 'accent', 'deep', 'juice', 'ondeep']
 const PAPER = { bg: '#F4F0E6', ink: '#17150F' }
 
@@ -61,7 +60,7 @@ function Plate({ id, h, theme = PAPER, label, full, className = '', children }) 
             <span>Odd Orchard — a field guide</span>
             <span>{label}</span>
             <span>
-              Plate {id} / {TOTAL}
+              Plate {plateNo(id)} / {TOTAL}
             </span>
           </header>
         )}
@@ -142,31 +141,16 @@ function P01() {
   )
 }
 
-/* ---------- 02 · context ---------- */
-
-function P02() {
-  // A typographic statement: the problem. The what/why lives in the Behance intro text, not here.
-  return (
-    <Plate id="02" h={760} label="01 — Brand identity · Challenge" className="p02">
-      <div className="p02__body">
-        <h2 className="t-display p02__title">
-          Most juice brands <em>look alike.</em>
-        </h2>
-        <p className="p02__text">
-          Fruit, splash, bright colour, repeat. The aim was a brand remembered by character — and a site where switching a flavor feels like
-          stepping somewhere else, not changing a filter.
-        </p>
-      </div>
-    </Plate>
-  )
-}
-
 /* ---------- 03 · a flavor is a world ---------- */
 
 function P03() {
   const f = KIWI
   return (
     <Plate id="03" h={0} label="01 — Brand identity · Idea">
+      {/* The problem, as a one-line lead-in that the plate immediately answers. */}
+      <h2 className="t-display p03__kicker">
+        Most juice brands <em>look alike.</em>
+      </h2>
       <div className="grid p03__top">
         <Title a="A flavor is" b="a world." size={120} />
         <p className="lede">
@@ -628,7 +612,14 @@ function Cover() {
   )
 }
 
-const PLATES = { '01': P01, '02': P02, '03': P03, '04': P04, '05': P05, '06': P06, '07': P07, '08': P08, '09': P09, '10': P10, '11': P11, '12': P12 }
+// Plate components keep their original ids (stable URLs: ?plate=NN); the printed
+// number comes from the order here, so removing a plate renumbers the rest.
+const PLATES = { '01': P01, '03': P03, '04': P04, '05': P05, '06': P06, '07': P07, '08': P08, '09': P09, '10': P10, '11': P11, '12': P12 }
+
+// Sorted explicitly: '10'–'12' are integer-like keys, which JS objects list first.
+const ORDER = Object.keys(PLATES).sort()
+const TOTAL = String(ORDER.length).padStart(2, '0')
+const plateNo = (id) => String(ORDER.indexOf(id) + 1).padStart(2, '0')
 
 export default function Case({ only }) {
   if (only === 'cover') return <Cover />
@@ -643,9 +634,9 @@ export default function Case({ only }) {
           <Logo /> <span className="mono">Behance case study</span>
         </span>
         <span className="bar__links mono">
-          {Object.keys(PLATES).map((k) => (
+          {ORDER.map((k) => (
             <a key={k} href={`#plate-${k}`}>
-              {k}
+              {plateNo(k)}
             </a>
           ))}
           <a href="#plate-cover">cover</a>
@@ -655,9 +646,10 @@ export default function Case({ only }) {
         </a>
       </nav>
       <main className="stack">
-        {Object.entries(PLATES).map(([k, P]) => (
-          <P key={k} />
-        ))}
+        {ORDER.map((k) => {
+          const P = PLATES[k]
+          return <P key={k} />
+        })}
         <div className="cover-wrap">
           <p className="mono">Behance cover · 808 × 632</p>
           <Cover />

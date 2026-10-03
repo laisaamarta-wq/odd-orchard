@@ -408,33 +408,13 @@ em {
   margin-left: 4px;
 }
 
-/* ---------- 02 · context ---------- */
-
-.p02__top {
-  margin-bottom: 64px;
-}
-
-.p02__copy {
-  display: grid;
-  gap: 28px;
-  font-size: 17px;
-  line-height: 1.5;
-}
-.p02__copy .lab {
-  margin-bottom: 8px;
-  opacity: 0.6;
-}
-.p02__meta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 40px;
-  padding-top: 22px;
-  border-top: 1px solid color-mix(in srgb, var(--pink) 22%, transparent);
-  opacity: 0.8;
-}
-
 /* ---------- 03 · idea ---------- */
 
+.p03__kicker {
+  font-size: 64px;
+  margin: 8px 0 48px;
+  opacity: 0.38;
+}
 .p03__top {
   margin-bottom: 64px;
 }
@@ -956,30 +936,4 @@ em {
 }
 .cover-wrap {
   max-width: 100%;
-}
-
-/* ---------- 02 · challenge statement ---------- */
-
-.p02 .plate__art {
-  display: flex;
-  flex-direction: column;
-}
-.p02__body {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--g);
-  align-content: center;
-  row-gap: 48px;
-  padding-bottom: 40px;
-}
-.p02__title {
-  grid-column: 1 / span 10;
-  font-size: 148px;
-}
-.p02__text {
-  grid-column: 7 / span 5;
-  font-size: 20px;
-  line-height: 1.5;
-  opacity: 0.86;
 }
