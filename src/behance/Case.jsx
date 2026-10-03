@@ -593,6 +593,83 @@ function P12() {
 
 /* ---------- cover · 808 × 632 ---------- */
 
+/* ---------- 13 · let's talk ---------- */
+
+const WA = '37128203044'
+const WA_LABEL = '+371 28203044'
+const WA_URL = `https://wa.me/${WA}`
+
+// A seamless 6 s loop: every animation duration divides 6 s, so the motion
+// export (scripts/behance/cta.mjs) can scrub it frame by frame.
+function P13() {
+  const [k, o, c, p] = FLAVORS
+  const fruit = [
+    ['fruit-kiwi-1', 128, 556, 118, -12, 0],
+    ['fruit-orange-3', 360, 70, 96, 18, -1.5],
+    ['fruit-kiwi-4', 1010, 64, 100, -20, -3],
+    ['fruit-orange-1', 1186, 196, 146, 10, -4.5],
+    ['fruit-pitaya-1', 1100, 560, 118, -8, -2],
+    ['fruit-cherry-1', 236, 470, 118, 12, -3.5],
+    ['fruit-pitaya-4', 74, 420, 66, 22, -5],
+    ['fruit-cherry-2', 1290, 420, 52, -16, -1],
+  ]
+  const drops = [
+    [210, k.palette.juice, 0], [330, o.palette.juice, -0.7], [520, p.palette.juice, -1.4], [640, c.palette.juice, -2.1],
+    [780, o.palette.juice, -0.4], [900, k.palette.deep, -1.8], [1060, p.palette.juice, -1.1], [1190, c.palette.juice, -2.5],
+  ]
+  return (
+    <section className="plate p13" id="plate-13" data-plate="13" style={pal(k)}>
+      <div className="p13__art">
+        <span className="p13__thread" aria-hidden="true" />
+        <img className="p13__bat" src={asset('char-cherry')} alt="" />
+        <img className="p13__moth" src={asset('char-orange')} alt="" />
+        {fruit.map(([n, x, y, w, r, d]) => (
+          <span key={n} className="p13__fruit" style={{ left: x, top: y, width: w, '--r': `${r}deg`, animationDelay: `${d}s` }}>
+            <img src={asset(n)} alt="" />
+          </span>
+        ))}
+
+        <div className="p13__copy">
+          <p className="mono p13__kicker">Odd Orchard — the last page of the field guide</p>
+          <h2 className="p13__title">
+            <span>Let’s make something</span>
+            <em>fresh.</em>
+          </h2>
+          <p className="p13__sub">Have a project, an idea, or a brand that needs a fresh perspective?</p>
+          <a className="p13__btn" href={WA_URL} target="_blank" rel="noreferrer">
+            <span className="p13__btn-fill" aria-hidden="true" />
+            <span className="p13__btn-label">Let’s talk</span>
+            <span className="p13__btn-arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+          <p className="p13__note">Available for freelance projects &amp; creative collaborations.</p>
+          <a className="p13__wa mono" href={WA_URL} target="_blank" rel="noreferrer">
+            WhatsApp — {WA_LABEL}
+          </a>
+        </div>
+
+        {drops.map(([x, col, d], i) => (
+          <i key={i} className="p13__drop" style={{ left: x, background: col, animationDelay: `${d}s` }} aria-hidden="true" />
+        ))}
+        <div className="p13__sea" aria-hidden="true">
+          {[c, o, p].map((f, i) => (
+            <svg key={f.id} className={`p13__wave p13__wave--${i}`} viewBox="0 0 2800 200" preserveAspectRatio="none">
+              <path
+                fill={f.palette.juice}
+                d="M0 60 C 175 0 525 0 700 60 S 1225 120 1400 60 S 1925 0 2100 60 S 2625 120 2800 60 V200 H0 Z"
+              />
+            </svg>
+          ))}
+          {[k, o, c, p].map((f, i) => (
+            <img key={f.id} className={`p13__bottle p13__bottle--${i}`} src={asset(`bottle-${f.id}`)} alt="" style={{ animationDelay: `${-i * 0.75}s` }} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // Project cover (808 × 632, exported @2x). The cherry hero as a full first screen:
 // Vesper hangs at the centre, the world is built around him from real site assets.
 function Cover() {
@@ -658,12 +735,14 @@ function Cover() {
 
 // Plate components keep their original ids (stable URLs: ?plate=NN); the printed
 // number comes from the order here, so removing a plate renumbers the rest.
-const PLATES = { '01': P01, '03': P03, '04': P04, '05': P05, '06': P06, '07': P07, '08': P08, '09': P09, '10': P10, '11': P11, '12': P12 }
+const PLATES = { '01': P01, '03': P03, '04': P04, '05': P05, '06': P06, '07': P07, '08': P08, '09': P09, '10': P10, '11': P11, '12': P12, '13': P13 }
 
 // Sorted explicitly: '10'–'12' are integer-like keys, which JS objects list first.
 const ORDER = Object.keys(PLATES).sort()
-const TOTAL = String(ORDER.length).padStart(2, '0')
-const plateNo = (id) => String(ORDER.indexOf(id) + 1).padStart(2, '0')
+// The closing CTA (13) is an epilogue, not a numbered plate.
+const NUMBERED = ORDER.filter((k) => k !== '13')
+const TOTAL = String(NUMBERED.length).padStart(2, '0')
+const plateNo = (id) => String(NUMBERED.indexOf(id) + 1).padStart(2, '0')
 
 export default function Case({ only }) {
   if (only === 'cover') return <Cover />
