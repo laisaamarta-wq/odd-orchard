@@ -593,21 +593,111 @@ function P12() {
 
 /* ---------- cover · 808 × 632 ---------- */
 
+// Project cover (808 × 632, exported @2x). The cherry hero as a full first screen:
+// Vesper hangs at the centre, the world is built around him from real site assets.
 function Cover() {
   const f = CHERRY
+  const sparks = [
+    [92, 236, 3], [212, 92, 2], [300, 470, 2], [520, 70, 3], [560, 210, 2], [688, 410, 3],
+    [742, 236, 2], [152, 404, 2], [470, 520, 2], [640, 120, 2], [380, 150, 2], [258, 300, 3],
+  ]
   return (
-    <section className="cover" id="plate-cover" data-plate="cover" style={pal(f)}>
-      <span className="cover__word" aria-hidden="true">
+    <section className="cover cv" id="plate-cover" data-plate="cover" style={pal(f)}>
+      <div className="cv__rings" aria-hidden="true">
+        <i style={{ width: 300, height: 300 }} />
+        <i style={{ width: 460, height: 460 }} />
+        <i style={{ width: 640, height: 640 }} />
+      </div>
+      {sparks.map(([x, y, r], i) => (
+        <i key={i} className="cv__spark" style={{ left: x, top: y, width: r, height: r }} aria-hidden="true" />
+      ))}
+      <span className="cv__word" aria-hidden="true">
         {f.word}
       </span>
-      <div className="cover__logo">
-        <Logo />
+
+      {/* depth: far, soft cherries */}
+      <img className="cv__fruit cv__fruit--far" src={asset('fruit-cherry-2')} alt="" style={{ left: 548, top: 96, width: 34, transform: 'rotate(-18deg)' }} />
+      <img className="cv__fruit cv__fruit--far" src={asset('fruit-cherry-1')} alt="" style={{ left: 482, top: 486, width: 54, transform: 'rotate(12deg)' }} />
+      <img className="cv__fruit cv__fruit--far" src={asset('fruit-cherry-3')} alt="" style={{ left: 250, top: 96, width: 40, transform: 'rotate(-24deg)' }} />
+
+      {/* the bottle and its keeper */}
+      <div className="cv__glow" aria-hidden="true" />
+      <div className="cv__shadow" aria-hidden="true" />
+      <img className="cv__bottle" src={asset('bottle-cherry')} alt="Black Cherry & Hibiscus bottle" />
+      <div className="cv__bat">
+        <span className="cv__thread" aria-hidden="true" />
+        <img src={asset('char-cherry')} alt="Vesper, the velvet cherry bat" />
       </div>
-      <span className="cover__no mono">Nº {f.no} / 04</span>
-      <Specimen f={f} h={420} className="cover__sp" />
-      <p className="cover__line">
-        Every flavor <em>has a keeper.</em>
-      </p>
+
+      {/* near fruit */}
+      <img className="cv__fruit" src={asset('fruit-cherry-1')} alt="" style={{ left: 566, top: 418, width: 150, transform: 'rotate(-12deg)' }} />
+      <img className="cv__fruit" src={asset('fruit-cherry-3')} alt="" style={{ left: 628, top: 246, width: 92, transform: 'rotate(16deg)' }} />
+      <img className="cv__fruit" src={asset('fruit-cherry-2')} alt="" style={{ left: 262, top: 196, width: 54, transform: 'rotate(14deg)' }} />
+      <img className="cv__fruit cv__fruit--near" src={asset('fruit-cherry-4')} alt="" style={{ left: -46, top: 426, width: 206, transform: 'rotate(-16deg)' }} />
+
+      {/* interface */}
+      <header className="cv__nav">
+        <span className="cv__logo">
+          <Logo />
+        </span>
+        <span className="cv__links">
+          {['Flavors', 'The bottle', 'Field notes', 'Keepers', 'Ritual'].map((l) => (
+            <span key={l}>{l}</span>
+          ))}
+        </span>
+        <span className="cv__basket">
+          Basket <b>2</b>
+        </span>
+      </header>
+
+      <div className="cv__copy">
+        <p className="mono cv__kicker">Cold-pressed · from an orchard that isn’t on any map</p>
+        <h1 className="cv__title">
+          Every flavor <em>has a keeper.</em>
+        </h1>
+        <p className="cv__chip">
+          <i />
+          <span>
+            {f.full} — kept by <b>{f.keeper.name}</b>, the velvet cherry bat
+          </span>
+        </p>
+        <span className="cv__btn">
+          Taste the cherry world <span>→</span>
+        </span>
+      </div>
+
+      <div className="cv__side">
+        <p className="cv__no">
+          Nº {f.no}
+          <small className="mono"> / 04</small>
+        </p>
+        <p className="cv__tag">{f.tagline}</p>
+        <p className="cv__notes">
+          {f.notes.map((n) => (
+            <span key={n} className="mono">
+              {n}
+            </span>
+          ))}
+        </p>
+      </div>
+
+      <nav className="cv__switch" aria-label="Flavors">
+        {FLAVORS.map((x) => (
+          <span key={x.id} className={`cv__sw ${x.id === f.id ? 'is-on' : ''}`}>
+            <i style={{ background: x.palette.bg }}>
+              <img src={asset(`bottle-${x.id}`)} alt="" />
+            </i>
+            <span>
+              <small className="mono">{x.no}</small>
+              {x.name}
+            </span>
+          </span>
+        ))}
+        <span className="cv__cursor mono" aria-hidden="true">
+          Switch
+        </span>
+      </nav>
+      <p className="mono cv__scroll">Scroll into the orchard</p>
     </section>
   )
 }
