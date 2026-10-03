@@ -91,8 +91,11 @@ async function glide(page, rec, a, b, ms) {
 
 const SCENES = {
   // Kiwi → orange → cherry → pitaya → kiwi, clicked on the real switcher.
+  // OO_HIRES=1 records at 2x and writes a 2560×1600 master (for YouTube, which only
+  // serves renditions up to the source size — 1440p keeps it sharp at full width).
   async switch(b) {
-    const { page, ctx } = await openPage(b, 'desktop', { cursor: true, dpr: 1.5 })
+    const hi = !!process.env.OO_HIRES
+    const { page, ctx } = await openPage(b, 'desktop', { cursor: true, dpr: hi ? 2 : 1.5 })
     await settleHero(page)
     await page.mouse.move(1100, 500)
     await tick(page, 600)
@@ -107,6 +110,11 @@ const SCENES = {
       await page.mouse.up()
       at = await glide(page, rec, at, { x: to.x + 260, y: to.y - 330 }, 900)
       await rec.hold(2200)
+    }
+    if (hi) {
+      encode(rec.dir, 'mo-world-switch-2560x1600.mp4', { scale: '2560:1600' })
+      await ctx.close()
+      return
     }
     encode(rec.dir, 'mo-world-switch-1440x900.mp4', { scale: '1440:900' })
     // the keeper entrances, square crop on the stage
